@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image";
+import { useRef, useState } from "react";
 import { FiAtSign } from "react-icons/fi";
 import { GrGoogle } from "react-icons/gr";
 import { GrGithub } from "react-icons/gr";
@@ -6,6 +9,15 @@ import { IoFingerPrintSharp } from "react-icons/io5";
 
 
 const SignInComponent = () => {
+
+   
+   const [emailFocus, setemailFocus] = useState(-1);
+   const [passwordFocus, setpasswordFocus] = useState(-1);
+   const [passDisplay, setpassDisplay] = useState(-1);
+
+   
+   const emailRef=useRef();
+   const passwordRef=useRef();
 
    return (
       <div className=" flex justify-center items-center">
@@ -22,19 +34,23 @@ const SignInComponent = () => {
                <h1 className=" font-bold text-lg text-center text-blue-500">SIGN IN</h1>
                <form  className=" flex flex-col gap-4">
                   <div className={
-                       " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-zinc-600 border-2"
+                        emailFocus == -1
+                        ? " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-zinc-600 border-2"
+                        : " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-indigo-500 border-2"
 
                   }>
-                     <input  placeholder="Email"   type="text" className=" w-full bg-transparent outline-none" />
+                     <input onFocus={() => setemailFocus(1)} onBlur={() => setemailFocus(-1)} ref={emailRef}  placeholder="Email"   type="text" className=" w-full bg-transparent outline-none" />
                      <span className=""><FiAtSign className=" w-6 h-6" /></span>
                   </div>
                   <div className={
                      
-                       " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-zinc-600 border-2"
+                     passwordFocus == -1
+                     ? " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-zinc-600 border-2"
+                     : " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-indigo-500 border-2"
 
                   }>
-                     <input  placeholder="Password"  type="password" className=" w-full  bg-transparent outline-none" />
-                     <span className=""><IoFingerPrintSharp  className=" w-6 h-6" /></span>
+                     <input ref={passwordRef}  placeholder="Password"  onFocus={() => setpasswordFocus(1)} onBlur={() => setpasswordFocus(-1)} type={passDisplay == -1 ? "password" : "text"}className=" w-full  bg-transparent outline-none" />
+                     <span className=""><IoFingerPrintSharp onClick={() => setpassDisplay(passDisplay * -1)} className=" w-6 h-6" /></span>
                   </div>
                   <button className=" bg-[#38D39F] transition-all duration-500 hover:bg-[#32BD8F] rounded p-2 w-full text-white" type="submit">SIGN IN</button>
                </form>
