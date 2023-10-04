@@ -6,6 +6,7 @@ import { FiAtSign } from "react-icons/fi";
 import { GrGoogle } from "react-icons/gr";
 import { GrGithub } from "react-icons/gr";
 import { IoFingerPrintSharp } from "react-icons/io5";
+import { signIn } from "next-auth/react";
 
 
 const SignInComponent = () => {
@@ -58,6 +59,9 @@ const SignInComponent = () => {
                   <button
                   className=" bg-white border-2 border-blue-500 transition-all duration-500 hover:bg-blue-500 rounded p-2 w-full text-blue-600 hover:text-white flex justify-center items-center gap-4" type="submit"><GrGoogle /><span>GOOGLE SIGN IN</span></button>
                   <button
+                  onClick={()=>
+                  signIn("github",{callbackUrl:`${process.env.NEXTAUTH_URL}/account`})
+                  }
                   className=" bg-white border-2 border-slate-800  transition-all duration-500 hover:bg-slate-800 rounded p-2 w-full text-slate-800 hover:text-white flex justify-center items-center gap-4" type="submit"><GrGithub /><span>GITHUB SIGN IN</span></button>
                </div>
             </div>
