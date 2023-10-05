@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 const SignOut = () => {
 
    const {data:session,status}=useSession();
-   console.log(status)
+   console.log("status =>",status)
  
    return (
       <div>
