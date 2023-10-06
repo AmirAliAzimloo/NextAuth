@@ -57,6 +57,9 @@ const SignInComponent = () => {
                </form>
                <div className=" flex flex-col gap-4">
                   <button
+                  onClick={()=>
+                  signIn("google",{callbackUrl:`${process.env.NEXTAUTH_URL}/account`})
+                  }
                   className=" bg-white border-2 border-blue-500 transition-all duration-500 hover:bg-blue-500 rounded p-2 w-full text-blue-600 hover:text-white flex justify-center items-center gap-4" type="submit"><GrGoogle /><span>GOOGLE SIGN IN</span></button>
                   <button
                   onClick={()=>
