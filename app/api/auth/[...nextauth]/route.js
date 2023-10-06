@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialProvider from "next-auth/providers/credentials";
 import dbConnect from "@/util/dbConnect";
 import User from "@/models/User";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 export const authOptions = {
   secret:process.env.AUTH_SECRET,
@@ -17,20 +17,20 @@ export const authOptions = {
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET
     }),
-    // CredentialProvider({
-    //   name:"Credentials",
-    //   async authorize(credentials,req){
-    //      dbConnect();
+    CredentialProvider({
+      name:"Credentials",
+      async authorize(credentials,req){
+         dbConnect();
          
-    //      const emailExist=await User.findOne({email:credentials.email});
-    //      if(!emailExist){throw new Error("email not found...")};
+         const emailExist=await User.findOne({email:credentials.email});
+         if(!emailExist){throw new Error("email not found...")};
 
-    //      const isPasswordTrue=await bcrypt.compare(credentials.password,emailExist.password);
-    //      if(!isPasswordTrue){throw new Error("password is wrong...")};
+         const isPasswordTrue=await bcrypt.compare(credentials.password,emailExist.password);
+         if(!isPasswordTrue){throw new Error("password is wrong...")};
 
-    //      return emailExist;
-    //   }
-    // }),
+         return emailExist;
+      }
+    }),
   ],
 };
 

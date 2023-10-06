@@ -20,6 +20,20 @@ const SignInComponent = () => {
    const emailRef=useRef();
    const passwordRef=useRef();
 
+   const credentialsLogin= async(e)=>{
+      e.preventDefault();
+
+
+      const status=await signIn("credentials",{
+         email:emailRef.current.value,
+         password:passwordRef.current.value,
+         callbackUrl:"/account",
+      })
+
+      console.log(status)
+
+   }
+
    return (
       <div className=" flex justify-center items-center">
          <div className="  flex justify-between items-center w-full  shadow-lg shadow-green-900 rounded-md p-8">
@@ -33,7 +47,7 @@ const SignInComponent = () => {
             </div>
             <div className=" w-80 flex flex-col gap-6">
                <h1 className=" font-bold text-lg text-center text-blue-500">SIGN IN</h1>
-               <form  className=" flex flex-col gap-4">
+               <form onSubmit={credentialsLogin} className=" flex flex-col gap-4">
                   <div className={
                         emailFocus == -1
                         ? " bg-white border-zinc-200 rounded flex items-center p-2 w-full text-zinc-600 border-2"

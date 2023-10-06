@@ -8,7 +8,7 @@ import { FiUser } from "react-icons/fi";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 
-const SignInComponent = () => {
+const SignUpComponent = () => {
 
    const [emailFocus, setemailFocus] = useState(-1);
    const [passwordFocus, setpasswordFocus] = useState(-1);
@@ -55,7 +55,7 @@ const SignInComponent = () => {
 
    return (
       <div className=" flex justify-center items-center">
-         <div className="  flex justify-between items-center w-2/3  shadow-md shadow-zinc-200 rounded-md p-8">
+         <div className="  flex justify-between items-center w-2/3  shadow-md shadow-green-900 rounded-md p-8">
             <div className=" ">
                <Image
                   width={400}
